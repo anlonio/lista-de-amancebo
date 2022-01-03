@@ -3,58 +3,99 @@
     <v-app-bar
       app
       color="primary"
-      dark
     >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-toolbar-title>
+        Lista de 
+        <span class="casamento">Casamento
+          <span class="amancebo">Amancebo</span>
+        </span>
+      </v-toolbar-title>
 
       <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
     </v-app-bar>
+    <v-navigation-drawer
+      v-model="drawer"
+      absolute
+      temporary
+    >
+      <v-list
+        nav
+        dense
+      >
+        <v-list-item>
+          <v-list-item-title>Foo</v-list-item-title>
+        </v-list-item>
 
+        <v-list-item>
+          <v-list-item-title>Bar</v-list-item-title>
+        </v-list-item>
+
+        <v-list-item>
+          <v-list-item-title>Fizz</v-list-item-title>
+        </v-list-item>
+
+        <v-list-item>
+          <v-list-item-title>Buzz</v-list-item-title>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
     <v-main>
-      <HelloWorld/>
+      <v-list>
+        <v-list-item>
+          <v-list-item-title>Comida</v-list-item-title>
+        </v-list-item>
+
+        <v-list-item>
+          <v-list-item-title>Antonio</v-list-item-title>
+        </v-list-item>
+
+        <v-list-item>
+          <v-list-item-title>Natália</v-list-item-title>
+        </v-list-item>
+
+        <v-list-item>
+          <v-list-item-title>Diamba</v-list-item-title>
+        </v-list-item>
+      </v-list>
     </v-main>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
 
 export default {
   name: 'App',
 
-  components: {
-    HelloWorld,
-  },
-
   data: () => ({
-    //
+    drawer:false
   }),
 };
 </script>
+<style lang="scss" scoped>
+.amancebo{
+  display: none;
+}
+
+@keyframes casamento{
+  0%   { width : 0; }
+  100% { width: 100%; }
+}
+.casamento {
+  position: relative;
+}
+.casamento::after {
+  content: ' ';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: black;
+  animation-name: casamento;
+  animation-duration: 3s;
+  animation-timing-function: linear;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+</style>
