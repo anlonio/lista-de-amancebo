@@ -107,6 +107,7 @@ export default {
       categories:[
         "Geral",
         "Eletrodomésticos",
+        "Móveis"
       ],
       loading: false
     }

@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container>    
     <app-list></app-list>
   </v-container>
 </template>
