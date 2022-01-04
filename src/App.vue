@@ -13,6 +13,17 @@
       </v-toolbar-title>
 
       <v-spacer></v-spacer>
+      <v-btn
+        class="fab"
+        color="green"
+        dark
+        absolute
+        right
+        bottom
+        fab
+      >
+        <v-icon>mdi-whatsapp</v-icon>
+      </v-btn>
     </v-app-bar>
     <v-navigation-drawer
       v-model="drawer"
@@ -39,40 +50,35 @@
           <v-list-item-title>Buzz</v-list-item-title>
         </v-list-item>
       </v-list>
+      <template v-slot:append>
+        <div class="pa-2 text-right">
+          <v-btn icon>
+            <v-icon>mdi-login</v-icon>
+          </v-btn>
+        </div>
+      </template>
     </v-navigation-drawer>
     <v-main>
-      <v-list>
-        <v-list-item>
-          <v-list-item-title>Comida</v-list-item-title>
-        </v-list-item>
-
-        <v-list-item>
-          <v-list-item-title>Antonio</v-list-item-title>
-        </v-list-item>
-
-        <v-list-item>
-          <v-list-item-title>Natália</v-list-item-title>
-        </v-list-item>
-
-        <v-list-item>
-          <v-list-item-title>Diamba</v-list-item-title>
-        </v-list-item>
-      </v-list>
+      <app-list></app-list>
     </v-main>
   </v-app>
 </template>
 
 <script>
+import AppList from '@/components/AppList.vue';
 
 export default {
   name: 'App',
-
+  components:{
+    AppList
+  },
   data: () => ({
     drawer:false
   }),
 };
 </script>
 <style lang="scss" scoped>
+
 .amancebo{
   display: none;
 }
