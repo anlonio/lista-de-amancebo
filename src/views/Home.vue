@@ -31,7 +31,7 @@
           Caso prefira nos ajudar enviando alguma quantia via Pix, <router-link :to="{name:'Pix'}">clique aqui</router-link>.
         </p>
         <p>
-          Caso queira só queira nos desejar boa sorte e ver uma foto fofa, <a @click="cute">clique aqui</a>.
+          Caso só queira nos desejar boa sorte e ver uma foto fofa, <a @click="cute">clique aqui</a>.
         </p>
       </v-col>
     </v-row>
