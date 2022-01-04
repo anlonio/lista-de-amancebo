@@ -10,17 +10,32 @@
           </v-btn>
         </template>
         <v-list>
+          <v-subheader>Categorias</v-subheader>
           <v-list-item-group
             multiple
             active-class=""
             v-model="selectedCategories"
           >
-            <v-list-item v-for="category in categories" :key="category">
+            <v-list-item v-for="category in categories" :key="category" :value="category">
               <template v-slot:default="{ active }">
                 <v-list-item-action>
                   <v-checkbox :input-value="active"></v-checkbox>
                 </v-list-item-action>
                 <v-list-item-title>{{ category }}</v-list-item-title>
+              </template>
+            </v-list-item>
+          </v-list-item-group>
+          <v-subheader>Cômodos</v-subheader>
+          <v-list-item-group
+            active-class=""
+            v-model="selectedRooms"
+          >
+            <v-list-item v-for="room in rooms" :key="room" :value="room">
+              <template v-slot:default="{ active }">
+                <v-list-item-action>
+                  <v-checkbox :input-value="active"></v-checkbox>
+                </v-list-item-action>
+                <v-list-item-title>{{ room }}</v-list-item-title>
               </template>
             </v-list-item>
           </v-list-item-group>
@@ -50,9 +65,18 @@ export default {
     return {
       items: [],
       selectedCategories:[],
+      selectedRooms:null,
+      rooms:[
+        "Sala",
+        "Quarto",
+        "Banheiro",
+        "Cozinha",
+        "Lavanderia",
+      ],
       categories:[
-        "Geral",
         "Eletrodomésticos",
+        "Utensílios de Cozinha",
+        "Cama, Mesa e Banho",
         "Móveis"
       ],
       hideBuyed: false
@@ -61,18 +85,20 @@ export default {
   methods:{
     refreshData(){
       let r = db.collection('items')
-      if(this.selectedCategories){
+      if(this.selectedCategories.length > 0){
         r = r.where('category', 'in', 
-        this.selectedCategories.length == 0 ? 
-        this.categories:
         this.selectedCategories)
       }
+      if(this.selectedRooms){
+        r = r.where('room', '==', 
+        this.selectedRooms)
+      }
       if(this.hideBuyed){
-        r = r.where('buyed', '==', true)
+        r = r.where('buyed', '==', false)
       } 
       this.$bind(
         'items',
-        r.orderBy('name')
+        r.orderBy('category')
       )
     }
   },
@@ -82,10 +108,13 @@ export default {
     },
     selectedCategories(){
       this.refreshData()
+    },
+    selectedRooms(){
+      this.refreshData()
     }
   },
   firestore: {
-    items: db.collection('items').orderBy('name')
+    items: db.collection('items').orderBy('category')
   }
 }
 </script>

@@ -55,6 +55,11 @@
     <v-main>
       <router-view/>
     </v-main>
+    <v-footer app>
+      <v-spacer></v-spacer>
+      Antonio Machado & Natália Simões
+      <v-spacer></v-spacer>
+    </v-footer>
   </v-app>
 </template>
 

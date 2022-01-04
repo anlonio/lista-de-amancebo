@@ -13,9 +13,9 @@
               </v-btn>
             </template>
             <v-card>
+              <v-form @submit.prevent="save">
               <v-card-title>{{ formTitle }}</v-card-title>
               <v-card-text>
-                <v-form>
                   <v-container grid-list-md>
                     <v-row no-gutters>
                       <v-col cols="12" class="pa-2">
@@ -25,7 +25,10 @@
                         <v-text-field label="Descrição" v-model="editedItem.description"></v-text-field>
                       </v-col>
                       <v-col cols="12" class="pa-2">
-                        <v-select v-model="editedItem.category" :items="categories"></v-select>
+                        <v-select label="Categoria" v-model="editedItem.category" :items="categories"></v-select>
+                      </v-col>
+                      <v-col cols="12" class="pa-2">
+                        <v-select label="Cômodo" v-model="editedItem.room" :items="rooms"></v-select>
                       </v-col>
                       <v-col cols="6" class="pa-2">
                         <v-checkbox label="comprado" v-model="editedItem.buyed"></v-checkbox>
@@ -35,12 +38,12 @@
                       </v-col>
                     </v-row>
                   </v-container>
-                </v-form>
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="success" :loading="loading" @click="save">Confirmar</v-btn>
+                <v-btn type="submit" color="success" :loading="loading">Confirmar</v-btn>
               </v-card-actions>
+              </v-form>
             </v-card>
           </v-dialog>
           <v-dialog v-model="dialogDelete" max-width="500px">
@@ -95,18 +98,26 @@ export default {
         description: "",
         buyed: false,
         buyer: "",
-        category: "Geral"
+        category: ""
       },
       editedItem:{
         name: "",
         description: "",
         buyed: false,
         buyer: "",
-        category: "Geral"
+        category: ""
       },
+      rooms:[
+        "Sala",
+        "Quarto",
+        "Banheiro",
+        "Cozinha",
+        "Lavanderia",
+      ],
       categories:[
-        "Geral",
         "Eletrodomésticos",
+        "Utensílios de Cozinha",
+        "Cama, Mesa e Banho",
         "Móveis"
       ],
       loading: false
