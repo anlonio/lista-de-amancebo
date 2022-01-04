@@ -100,7 +100,7 @@ export default {
   computed:{
     getLink(){
       return (number) =>{
-        return `https://wa.me/send?phone=${number}&text=${encodeURI(this.getMessage)}`
+        return `https://wa.me/${number}?text=${encodeURI(this.getMessage)}`
       }
     },
     getMessage(){
