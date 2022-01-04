@@ -11,19 +11,14 @@
           <span class="amancebo">Amancebo</span>
         </span>
       </v-toolbar-title>
-
       <v-spacer></v-spacer>
-      <v-btn
-        class="fab"
-        color="green"
-        dark
+      <v-progress-linear
+        :active="items.length == 0"
+        indeterminate
         absolute
-        right
         bottom
-        fab
-      >
-        <v-icon>mdi-whatsapp</v-icon>
-      </v-btn>
+        color="black"
+      ></v-progress-linear>
     </v-app-bar>
     <v-navigation-drawer
       v-model="drawer"
@@ -34,49 +29,68 @@
         nav
         dense
       >
-        <v-list-item>
-          <v-list-item-title>Foo</v-list-item-title>
+        <v-list-item :to="{name: 'Home'}" exact>
+          <v-list-item-title>Lista</v-list-item-title>
         </v-list-item>
 
-        <v-list-item>
-          <v-list-item-title>Bar</v-list-item-title>
+        <v-list-item :to="{name: 'About'}">
+          <v-list-item-title>Sobre</v-list-item-title>
         </v-list-item>
 
-        <v-list-item>
-          <v-list-item-title>Fizz</v-list-item-title>
-        </v-list-item>
-
-        <v-list-item>
-          <v-list-item-title>Buzz</v-list-item-title>
+        <v-list-item :to="{name: 'Admin'}" v-if="logged">
+          <v-list-item-title>Admin</v-list-item-title>
         </v-list-item>
       </v-list>
       <template v-slot:append>
         <div class="pa-2 text-right">
-          <v-btn icon>
+          <v-btn icon @click="logout" v-if="logged">
+            <v-icon>mdi-logout</v-icon>
+          </v-btn>
+          <v-btn icon @click="$router.push({name:'Login'})" v-else>
             <v-icon>mdi-login</v-icon>
           </v-btn>
         </div>
       </template>
     </v-navigation-drawer>
     <v-main>
-      <app-list></app-list>
+      <router-view/>
     </v-main>
   </v-app>
 </template>
 
 <script>
-import AppList from '@/components/AppList.vue';
+import { db, auth } from '@/db'
 
 export default {
-  name: 'App',
-  components:{
-    AppList
-  },
   data: () => ({
-    drawer:false
+    drawer:false,
+    items:[],
+    logged:false,
   }),
-};
+  firestore: {
+    items: db.collection('items')
+  },
+  mounted(){
+    auth.onAuthStateChanged((user)=>{
+      if(user){
+        this.logged = true
+      } else {
+        this.logged = false
+      }
+    })
+  },
+  methods:{
+    async logout(){
+      try {
+        await auth.signOut()
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }
+}
 </script>
+
 <style lang="scss" scoped>
 
 .amancebo{
