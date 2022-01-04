@@ -45,7 +45,7 @@
     <v-fade-transition group>
       <v-list-item v-for="item in items" :key="item.id">
         <v-list-item-action>
-          <v-checkbox :input-value="item.buyed" readonly></v-checkbox>
+          <v-checkbox :input-value="item.buyed" :disabled="item.buyed" :readonly="!item.buyed" @click="give(item.name)"></v-checkbox>
         </v-list-item-action>
 
         <v-list-item-content>
@@ -54,6 +54,19 @@
         </v-list-item-content>
       </v-list-item>
     </v-fade-transition>
+    <v-dialog v-model="giveDialog" max-width="360px">
+      <v-card>
+        <v-card-title>Escolher item</v-card-title>
+        <v-card-text>
+          Pra quem você deseja avisar?
+        </v-card-text>
+        <v-card-actions>
+          <v-btn text color="primary" :href="getLink('5584999866283')" target="_blank">Antonio</v-btn>
+          <v-spacer></v-spacer>
+          <v-btn text color="primary" :href="getLink('558498998012')" target="_blank">Francisca</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-list>
 </template>
 
@@ -79,10 +92,26 @@ export default {
         "Cama, Mesa e Banho",
         "Móveis"
       ],
-      hideBuyed: false
+      hideBuyed: false,
+      giveName: null,
+      giveDialog: false
+    }
+  },
+  computed:{
+    getLink(){
+      return (number) =>{
+        return `https://wa.me/send?phone=${number}&text=${encodeURI(this.getMessage)}`
+      }
+    },
+    getMessage(){
+      return `Vou ajudar com: ${this.giveName}! Espero que não seja tão caro.`
     }
   },
   methods:{
+    give(name){
+      this.giveName = name
+      this.giveDialog = true
+    },
     refreshData(){
       let r = db.collection('items')
       if(this.selectedCategories.length > 0){
