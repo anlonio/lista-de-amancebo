@@ -3,7 +3,7 @@
     <v-row justify="center">
       <v-col cols="12" md="6">
         <div>
-          <v-carousel height="100%">
+          <v-carousel :height="$vuetify.breakpoint.xsOnly?'160px':'100%'">
             <v-carousel-item
               eager
               :src="require('@/assets/casal-2.jpg')"

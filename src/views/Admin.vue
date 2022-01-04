@@ -19,7 +19,7 @@
                   <v-container grid-list-md>
                     <v-row no-gutters>
                       <v-col cols="12" class="pa-2">
-                        <v-text-field label="Nome" v-model="editedItem.name"></v-text-field>
+                        <v-text-field ref="name" label="Nome" v-model="editedItem.name"></v-text-field>
                       </v-col>
                       <v-col cols="12" class="pa-2">
                         <v-text-field label="Descrição" v-model="editedItem.description"></v-text-field>
@@ -177,9 +177,12 @@ export default {
         }else{
           await db.collection('items').add(this.editedItem)
         }
-        this.loading = false
+        this.editedItem.name = ''
+        this.$refs.name.$el.getElementsByTagName('input')[0].focus()
       } catch (error) {
         console.log(error);        
+      } finally {
+        this.loading = false
       }
     }
   },
