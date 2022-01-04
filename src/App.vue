@@ -22,23 +22,56 @@
     </v-app-bar>
     <v-navigation-drawer
       v-model="drawer"
-      absolute
+      fixed
       temporary
     >
+      <v-list-item color="primary" class="px-2">
+        <v-list-item-avatar>
+          <v-img :src="require('@/assets/pongo-avatar.png')"></v-img>
+        </v-list-item-avatar>
+        <v-list-item-content>
+          <v-list-item-title>Antonio & Francisca</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+      <v-divider></v-divider>
       <v-list
         nav
         dense
+        shaped
       >
-        <v-list-item :to="{name: 'Home'}" exact>
-          <v-list-item-title>Lista</v-list-item-title>
+        <v-list-item :to="{name: 'Home'}" exact active-class="primary white--text">
+          <v-list-item-icon><v-icon>mdi-home</v-icon></v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>Início</v-list-item-title>
+          </v-list-item-content>
         </v-list-item>
 
-        <v-list-item :to="{name: 'About'}">
-          <v-list-item-title>Sobre</v-list-item-title>
+        <v-list-item :to="{name: 'List'}" active-class="primary white--text">
+          <v-list-item-icon><v-icon>mdi-list-status</v-icon></v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>Lista</v-list-item-title>
+          </v-list-item-content>
         </v-list-item>
 
-        <v-list-item :to="{name: 'Admin'}" v-if="logged">
-          <v-list-item-title>Admin</v-list-item-title>
+        <v-list-item :to="{name: 'Pix'}" active-class="primary white--text">
+          <v-list-item-icon><v-icon>mdi-qrcode</v-icon></v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>Pix</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item :to="{name: 'About'}" active-class="primary white--text">
+          <v-list-item-icon><v-icon>mdi-information</v-icon></v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>Sobre</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item :to="{name: 'Admin'}" v-if="logged" active-class="primary white--text">
+          <v-list-item-icon><v-icon>mdi-cog</v-icon></v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>Admin</v-list-item-title>
+          </v-list-item-content>
         </v-list-item>
       </v-list>
       <template v-slot:append>
