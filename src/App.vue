@@ -8,7 +8,6 @@
       <v-toolbar-title>
         Lista de 
         <span class="casamento">Casamento
-          <span class="amancebo">Amancebo</span>
         </span>
       </v-toolbar-title>
       <v-spacer></v-spacer>

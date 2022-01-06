@@ -18,11 +18,11 @@
             ></v-carousel-item>
           </v-carousel>
         </div>
-        <h1 class="title">Sejam bem-vindos a nossa lista de <span class="text-decoration-line-through">casamento</span> amancebo!</h1>
+        <h1 class="title">Sejam bem-vindos a nossa lista de <span class="text-decoration-line-through">casamento</span> ajuntamento!</h1>
         <br>
         <p>
           Nós, <b>Antonio e Francisca</b>, agradecemos o apoio e ajuda de todos nossos amigos e familiares.
-          Vocês são muito importantes para o êxito desse amancebamento, obrigado!
+          Vocês são muito importantes para o êxito desse ajuntamento, obrigado!
         </p>
         <p>
           Caso queira ver nossa lista e escolher algum item, <router-link :to="{name:'List'}">clique aqui</router-link>.
